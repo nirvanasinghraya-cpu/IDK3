@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
+<title>Do you love me?</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #ffe6e9;
+  font-family: 'Quicksand', sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+}
+
+.local-gif, .gif-result {
+  max-width: 300px;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+.question {
+  font-size: 3rem; 
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.button-container {
+  position: relative;
+  width: 1000px;
+  height: 300px; 
+  margin: 0 auto 2rem;
+}
+
+.btn {
+  border: none;
+  border-radius: 50px;
+  padding: 5px 10px; 
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #ff6b81;
+  color: white;
+  box-shadow: 0px 4px 15px rgba(255,107,129,0.5);
+  transition: all 0.2s ease;
+  position: absolute; /* allow free positioning */
+}
+.btn:hover {
+  background-color: #ffa4b1;
+  transform: scale(1.1);
+  box-shadow: 0px 6px 20px rgba(255,107,129,0.7);
+}
+
+.result-container {
+  display: none;
+  text-align: center;
+}
+
+.result-container h2 {
+  font-size: 2.5rem;
+  margin-top: 1rem;
+}
+
+.heart-container {
+  display: none;
+  position: relative;
+  width: 600px;
+  height: 600px;
+  margin-top: 20px;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #9b59b6;
+  border-radius: 50%;
+  opacity: 0;
+  animation: appear 0.5s forwards;
+}
+
+@keyframes appear {
+  0% { opacity: 0; transform: scale(0); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.heart-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #e74c3c;
+  font-size: 2.5rem;
+  font-family: 'Quicksand', sans-serif;
+  text-align: center;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<div class="question-container container">
+  <video class="local-gif" src="Reply me love.mp4" autoplay muted loop></video>
+  <h2 class="question">Do you love me?</h2>
+  <div class="button-container">
+    <button class="yes-btn btn" style="top: 100px; left: 400px;">Yes</button>
+    <button class="no-btn btn" style="top: 100px; left: 500px;">No</button>
+  </div>
+</div>
+
+<div class="heart-container" id="heart-container">
+  <div class="heart-text">I ❤️ You</div>
+</div>
+
+<div class="result-container container">
+  <video class="gif-result" src="Love me.mp4" autoplay loop></video>
+  <h2>I knew it😍!</h2>
+</div>
+
+<script>
+const yesBtn = document.querySelector('.yes-btn');
+const noBtn = document.querySelector('.no-btn');
+const questionContainer = document.querySelector('.question-container');
+const resultContainer = document.querySelector('.result-container');
+const heartContainer = document.getElementById('heart-container');
+
+// Yes button click -> heart animation
+yesBtn.addEventListener('click', () => {
+  questionContainer.style.display = 'none';
+  heartContainer.style.display = 'block';
+
+  const numParticles = 500;
+  const centerX = 300;
+  const centerY = 300;
+  const scale = 18;
+
+  for (let i = 0; i < numParticles; i++) {
+    const t = Math.PI * 2 * i / numParticles;
+    const x = 16 * Math.pow(Math.sin(t), 3);
+    const y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
+
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = `${centerX + x * scale}px`;
+    particle.style.top = `${centerY - y * scale}px`;
+    particle.style.animationDelay = `${i * 0.004}s`;
+    heartContainer.appendChild(particle);
+  }
+
+  setTimeout(() => {
+    heartContainer.style.display = 'none';
+    resultContainer.style.display = 'block';
+  }, 4000);
+});
+
+// No button chaotic movement inside container
+function moveNoButton() {
+  const container = noBtn.parentElement;
+  const btnWidth = noBtn.offsetWidth;
+  const btnHeight = noBtn.offsetHeight;
+
+  const maxX = container.offsetWidth - btnWidth;
+  const maxY = container.offsetHeight - btnHeight;
+
+  const randomX = Math.floor(Math.random() * maxX);
+  const randomY = Math.floor(Math.random() * maxY);
+
+  noBtn.style.left = `${randomX}px`;
+  noBtn.style.top = `${randomY}px`;
+}
+
+noBtn.addEventListener('mouseenter', moveNoButton);
+
+document.addEventListener('mousemove', (e) => {
+  const rect = noBtn.getBoundingClientRect();
+  const distance = Math.hypot(e.clientX - (rect.left + rect.width/2), e.clientY - (rect.top + rect.height/2));
+  if(distance < 150){
+    moveNoButton();
+  }
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
