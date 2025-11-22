@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -36,18 +37,16 @@
 
   /* Form styling */
   form {
-    background-color: rgba(255,255,255,0.7);
+    background-color: rgba(255,255,255,0.4);
     padding: 2rem;
     border-radius: 12px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     width: 320px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     transition: background-color 0.5s ease, color 0.3s ease;
-      background-color: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(8px);
   }
 
   body.show-password form {
@@ -85,20 +84,24 @@
     fill: currentColor;
   }
 
+  /* Submit button styling */
   button[type="submit"] {
     padding: 0.7rem;
     border: none;
     border-radius: 6px;
-    background-color: currentColor;
-    color: #fff;
+    background-color: #1e90ff; /* Button background color */
+    color: #fff; /* Button text color */
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.1s ease;
+    transition: transform 0.1s ease, background-color 0.3s ease;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #1c86ee; /* Darker on hover */
   }
 
   button[type="submit"]:active {
     transform: translateY(2px);
-   text-color: red;
   }
 
 </style>
@@ -154,6 +157,8 @@ eyeball.addEventListener('click', () => {
 
 </body>
 </html>
+
+
 
 
 
