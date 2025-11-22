@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Password Input Light | Cars Day/Night</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bgColor: white;
+      --inputColor: black;
+      --outlineColor: dodgerblue;
+      --beamColor: yellow;
+      --spacer: 1rem;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+
+    body.show-password {
+      --bgColor: #000;
+      --inputColor: #fff;
+      --outlineColor: var(--beamColor);
+    }
+
+    /* Background layers */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: opacity 0.9s ease-in-out;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0;
+    }
+
+    .bg-layer.day { opacity: 1; }
+    .bg-layer.night { opacity: 0; }
+
+    body.show-password .bg-layer.day { opacity: 0; }
+    body.show-password .bg-layer.night { opacity: 1; }
+
+    /* Body and form */
+    body {
+      display: grid;
+      place-items: center;
+      transition: background-color 0.3s ease;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color: var(--inputColor);
+    }
+
+    form {
+      transform: translate3d(0,0,0);
+      padding: var(--spacer);
+      background-color: rgba(255,255,255,0.6);
+      border-radius: 8px;
+      backdrop-filter: blur(6px);
+      transition: background-color 0.5s ease, color 0.3s ease;
+      max-width: 420px;
+      width: calc(100% - 2rem);
+    }
+
+    body.show-password form {
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    form > * + * { margin-top: var(--spacer); }
+    .form-item > * + * { margin-top: 0.5rem; }
+
+    label, input, button {
+      font-size: 1.1rem;
+      font-family: monospace;
+      color: var(--inputColor);
+    }
+
+    label:focus, input:focus, button:focus {
+      outline: 3px solid var(--outlineColor);
+      outline-offset: 2px;
+    }
+
+    button { border: none; }
+
+    #submit {
+      cursor: pointer;
+      margin: calc(var(--spacer) * 2) 0 0 2px;
+      padding: 0.6rem 1rem;
+      color: var(--bgColor);
+      background-color: var(--inputColor);
+      box-shadow: 4px 4px 0 rgba(30, 144, 255, 0.15);
+    }
+
+    #submit:active { transform: translateY(1px); }
+
+    .input-wrapper { position: relative; }
+
+    input {
+      padding: 0.6rem 3.5rem 0.6rem 0.6rem;
+      width: 100%;
+      border: 2px solid transparent;
+      background-color: transparent;
+      box-shadow: inset 0 0 0 2px rgba(0,0,0,0.6);
+      -webkit-appearance: none;
+      color: inherit;
+    }
+
+    #eyeball {
+      --size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      outline: none;
+      position: absolute;
+      top: 50%;
+      right: 0.75rem;
+      background-color: transparent;
+      transform: translateY(-50%);
+      border-radius: 4px;
+      padding: 0.15rem;
+    }
+
+    .eye {
+      width: var(--size);
+      height: var(--size);
+      border: 2px solid currentColor;
+      border-radius: calc(var(--size)/1.5) 0;
+      transform: rotate(45deg);
+      position: relative;
+      color: var(--inputColor);
+    }
+
+    .eye:before,
+    .eye:after {
+      content: "";
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      margin: auto;
+      border-radius: 100%;
+    }
+
+    .eye:before { width: 35%; height: 35%; background-color: currentColor; }
+    .eye:after { width: 65%; height: 65%; border: 2px solid currentColor; }
+
+    #eyeball:focus { outline: 3px solid rgba(255,255,255,0.6); }
+
+    @media (max-width: 420px) {
+      label, input, button { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background images -->
+<div class="bg-layer day" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/09/Ford_Mustang_GT_2015.jpg')"></div>
+<div class="bg-layer night" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/25/Koenigsegg_Agera_RS.jpg')"></div>
+
+  <!-- Form -->
+  <form onsubmit="return false">
+    <div class="form-item">
+      <label for="username">Username</label>
+      <div class="input-wrapper">
+        <input type="text" id="username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" />
+      </div>
+    </div>
+    <div class="form-item">
+      <label for="password">Password</label>
+      <div class="input-wrapper">
+        <input type="password" id="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" />
+        <button type="button" id="eyeball" aria-pressed="false" aria-label="Show password">
+          <div class="eye" aria-hidden="true"></div>
+        </button>
+      </div>
+    </div>
+    <button id="submit">Sign in</button>
+  </form>
+
+  <script>
+    const eyeball = document.getElementById('eyeball');
+    const passwordInput = document.getElementById('password');
+    const body = document.body;
+
+    eyeball.addEventListener('click', togglePassword);
+    eyeball.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        togglePassword();
+      }
+    });
+
+    function togglePassword() {
+      const isHidden = passwordInput.type === 'password';
+      if (isHidden) {
+        passwordInput.type = 'text';
+        body.classList.add('show-password'); // Show night image
+        eyeball.setAttribute('aria-pressed', 'true');
+        eyeball.setAttribute('aria-label', 'Hide password');
+      } else {
+        passwordInput.type = 'password';
+        body.classList.remove('show-password'); // Show day image
+        eyeball.setAttribute('aria-pressed', 'false');
+        eyeball.setAttribute('aria-label', 'Show password');
+      }
+    }
+
+    // Ensure password starts hidden
+    passwordInput.type = 'password';
+    body.classList.remove('show-password');
+  </script>
+</body>
+</html>

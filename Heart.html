@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Heart with Appearing Text</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial;
+      color: white;
+    }
+
+    #text {
+      position: absolute;
+      top: 45%;
+      font-size: 40px;
+      font-weight: bold;
+      color: #ffb3c6;
+      text-shadow: 0 0 15px #ff4d6d, 0 0 40px #ff4d6d;
+      pointer-events: none;
+      text-align: center;
+      transform: translateY(-50%);
+      opacity: 0; /* start invisible */
+      transition: opacity 0.5s linear;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <div id="text">I LOVE YOU</div>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const text = document.getElementById("text");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const heartPoints = [];
+    const drawnPoints = [];
+    let drawIndex = 0;
+
+    const verticalOffset = -50; // move heart up
+
+    // Heart curve formula
+    function heartFunction(t) {
+      const x = 16 * Math.pow(Math.sin(t), 3);
+      const y =
+        13 * Math.cos(t) -
+        5 * Math.cos(2 * t) -
+        2 * Math.cos(3 * t) -
+        Math.cos(4 * t);
+      return { x, y };
+    }
+
+    // Generate heart points
+    function generateHeart() {
+      const scale = 25;
+      for (let t = 0; t < Math.PI * 2; t += 0.01) {
+        const p = heartFunction(t);
+        heartPoints.push({
+          x: p.x * scale + canvas.width / 2,
+          y: -p.y * scale + canvas.height / 2 + verticalOffset
+        });
+      }
+    }
+
+    // Draw glowing tip
+    function drawTip(p) {
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = "rgba(255, 150, 180, 1)";
+      ctx.shadowBlur = 25;
+      ctx.shadowColor = "rgba(255, 120, 160, 1)";
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    // Draw permanent glowing line
+    function drawLine(points) {
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "rgba(255, 90, 140, 0.95)";
+      ctx.shadowColor = "rgba(255, 70, 130, 1)";
+      ctx.shadowBlur = 15;
+
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
+
+    // Animation
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw permanent line
+      if (drawnPoints.length > 1) drawLine(drawnPoints);
+
+      // Add next point
+      if (drawIndex < heartPoints.length) {
+        const p = heartPoints[drawIndex];
+        drawnPoints.push(p);
+        drawIndex++;
+        drawTip(p);
+
+        // Show text gradually as the heart is being drawn
+        const progress = drawIndex / heartPoints.length;
+        text.style.opacity = progress;
+      } else {
+        // ensure text fully visible after complete
+        text.style.opacity = 1;
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    generateHeart();
+    animate();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
