@@ -26,13 +26,23 @@
     }
     
     body.light {
-      background-color: var(--bg-light);
-      color: var(--text-light);
+      background-color: #ffffff !important;
+      color: #1e293b;
     }
     
     body.dark {
-      background-color: var(--bg-dark);
-      color: var(--text-dark);
+      background-color: #0f172a !important;
+      color: #e2e8f0;
+    }
+    
+    /* Section backgrounds for light mode */
+    body.light section.bg-gray-50,
+    body.light section[class*="bg-gray-50"] {
+      background-color: #f8fafc !important;
+    }
+    
+    body.light footer {
+      background-color: #f8fafc !important;
     }
     
     .primary-text { color: var(--primary); }
@@ -128,6 +138,19 @@
     /* Sections */
     section { padding: 4rem 1rem; }
     
+    body.light section {
+      background-color: #ffffff;
+    }
+    
+    /* Gray sections in light mode */
+    body.light .bg-gray-50 {
+      background-color: #f8fafc !important;
+    }
+    
+    body.dark .bg-gray-900 {
+      background-color: #1e293b !important;
+    }
+    
     .section-title {
       font-size: 2.5rem;
       font-weight: 700;
@@ -149,9 +172,29 @@
       border-top: 1px solid rgba(0,0,0,0.1);
     }
     
+    body.light footer {
+      background-color: #f8fafc !important;
+      border-top-color: rgba(0,0,0,0.1);
+    }
+    
     body.dark footer {
       border-top-color: rgba(255,255,255,0.1);
-      background: #1e293b;
+      background: #1e293b !important;
+    }
+    
+    /* Story section */
+    body.light section:nth-of-type(2) {
+      background-color: #f8fafc !important;
+    }
+    
+    /* Location section */
+    body.light section:nth-of-type(5) {
+      background-color: #f8fafc !important;
+    }
+    
+    /* Accessibility section */
+    body.light section:nth-of-type(7) {
+      background-color: #f8fafc !important;
     }
     
     /* Accessibility */
