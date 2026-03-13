@@ -5,1012 +5,1190 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lete Thakali Kitchen - Authentic Thakali Cuisine</title>
   <meta name="description" content="Authentic Thakali cuisine from the heart of the Himalayas. Multiple locations in Kathmandu Valley.">
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    :root {
-      --primary: #b94a48;
-      --primary-light: #d46a68;
-      --bg-light: #ffffff;
-      --bg-dark: #0f172a;
-      --text-light: #1e293b;
-      --text-dark: #e2e8f0;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
-      transition: background-color 0.3s, color 0.3s;
+      background-color: #ffffff;
+      color: #333;
     }
     
-    body.light {
-      background-color: #ffffff !important;
-      color: #1e293b;
+    body.dark-mode {
+      background-color: #1a1a2e;
+      color: #eee;
     }
     
-    body.dark {
-      background-color: #0f172a !important;
-      color: #e2e8f0;
+    a {
+      text-decoration: none;
+      color: inherit;
     }
     
-    /* Section backgrounds for light mode */
-    body.light section.bg-gray-50,
-    body.light section[class*="bg-gray-50"] {
-      background-color: #f8fafc !important;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
-    
-    body.light footer {
-      background-color: #f8fafc !important;
-    }
-    
-    .primary-text { color: var(--primary); }
-    .primary-bg { background-color: var(--primary); }
-    .primary-bg-light { background-color: rgba(185, 74, 72, 0.1); }
     
     /* Header */
-    .header {
+    header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 1000;
-      padding: 1rem;
+      padding: 15px 0;
       transition: all 0.3s;
     }
     
-    .header.scrolled {
+    header.scrolled {
       background: rgba(255,255,255,0.95);
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     
-    body.dark .header.scrolled {
-      background: rgba(15,23,42,0.95);
+    body.dark-mode header.scrolled {
+      background: rgba(26,26,46,0.95);
     }
     
-    /* Hero */
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #b94a48;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    nav {
+      display: flex;
+      gap: 30px;
+    }
+    
+    nav a {
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    nav a:hover {
+      color: #b94a48;
+    }
+    
+    body.dark-mode nav a {
+      color: #eee;
+    }
+    
+    .header-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .header-buttons button {
+      background: none;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+    
+    .header-buttons button:hover {
+      background: rgba(0,0,0,0.05);
+    }
+    
+    body.dark-mode .header-buttons button:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    /* Mobile menu */
+    .mobile-menu-btn {
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
+    
+    /* Hero Section */
     .hero {
       min-height: 80vh;
-      background: linear-gradient(135deg, rgba(185,74,72,0.2), transparent, rgba(185,74,72,0.1)),
+      background: linear-gradient(135deg, rgba(185,74,72,0.2), transparent), 
                   url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=1500&q=80') center/cover;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 2rem;
+      padding: 100px 20px 60px;
     }
     
-    /* Cards */
-    .card {
-      border-radius: 1rem;
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
+    .hero-content {
+      max-width: 800px;
     }
     
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(185,74,72,0.1);
+      color: #b94a48;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 20px;
     }
     
-    body.dark .card {
-      background: #1e293b;
+    .hero h1 {
+      font-size: 3.5rem;
+      color: #b94a48;
+      margin-bottom: 20px;
     }
     
-    body.light .card {
-      background: white;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.8;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
     
-    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s;
       border: none;
+      font-size: 1rem;
     }
     
     .btn-primary {
-      background: var(--primary);
+      background: #b94a48;
       color: white;
     }
     
     .btn-primary:hover {
-      background: var(--primary-light);
+      background: #9a3e3c;
     }
     
     .btn-outline {
       background: transparent;
-      border: 2px solid var(--primary);
-      color: var(--primary);
+      border: 2px solid #b94a48;
+      color: #b94a48;
     }
     
     .btn-outline:hover {
-      background: var(--primary);
+      background: #b94a48;
       color: white;
     }
     
-    /* Sections */
-    section { padding: 4rem 1rem; }
-    
-    body.light section {
-      background-color: #ffffff;
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
     
-    /* Gray sections in light mode */
-    body.light .bg-gray-50 {
-      background-color: #f8fafc !important;
+    /* Section Styling */
+    .section {
+      padding: 80px 20px;
     }
     
-    body.dark .bg-gray-900 {
-      background-color: #1e293b !important;
+    .section-light {
+      background: #ffffff;
+    }
+    
+    .section-gray {
+      background: #f8f9fa;
+    }
+    
+    body.dark-mode .section-light {
+      background: #1a1a2e;
+    }
+    
+    body.dark-mode .section-gray {
+      background: #16162a;
     }
     
     .section-title {
       font-size: 2.5rem;
-      font-weight: 700;
+      color: #b94a48;
       text-align: center;
-      margin-bottom: 1rem;
-      color: var(--primary);
+      margin-bottom: 15px;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      opacity: 0.7;
+      margin-bottom: 50px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Story Card */
+    .story-card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+      border-left: 4px solid #b94a48;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    
+    body.dark-mode .story-card {
+      background: #252542;
+    }
+    
+    .story-card h2 {
+      color: #b94a48;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .story-card p {
+      line-height: 1.8;
+      opacity: 0.8;
+    }
+    
+    .story-card .author {
+      margin-top: 20px;
+      font-weight: 600;
+      color: #b94a48;
+    }
+    
+    /* Menu Grid */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .menu-card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    body.dark-mode .menu-card {
+      background: #252542;
+    }
+    
+    .menu-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    }
+    
+    .menu-card-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    
+    .menu-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(185,74,72,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b94a48;
+      font-size: 1.3rem;
+    }
+    
+    .menu-card h3 {
+      font-size: 1.3rem;
+      color: #333;
+    }
+    
+    body.dark-mode .menu-card h3 {
+      color: #eee;
+    }
+    
+    .menu-card p {
+      opacity: 0.7;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+    }
+    
+    .price {
+      font-weight: 700;
+      color: #b94a48;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+    }
+    
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .tag {
+      background: #f0f0f0;
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    body.dark-mode .tag {
+      background: #333355;
     }
     
     /* Info Bar */
     .info-bar {
-      background: var(--primary);
+      background: #b94a48;
       color: white;
-      padding: 3rem 1rem;
+      padding: 60px 20px;
+    }
+    
+    .info-bar .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      text-align: center;
+    }
+    
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .info-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    
+    .info-item h3 {
+      font-size: 1.1rem;
+    }
+    
+    .info-item p, .info-item a {
+      opacity: 0.85;
+    }
+    
+    .info-item a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+    
+    /* Location Cards */
+    .location-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 1100px;
+      margin: 0 auto 40px;
+    }
+    
+    .location-card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    
+    body.dark-mode .location-card {
+      background: #252542;
+    }
+    
+    .location-card h3 {
+      color: #b94a48;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .location-card p {
+      opacity: 0.7;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+    
+    .location-card a {
+      color: #b94a48;
+    }
+    
+    .location-card a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Map */
+    .map-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+    }
+    
+    .map-buttons {
+      background: white;
+      padding: 20px;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    body.dark-mode .map-buttons {
+      background: #252542;
+    }
+    
+    /* Reviews */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .review-card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    
+    body.dark-mode .review-card {
+      background: #252542;
+    }
+    
+    .review-card blockquote {
+      font-style: italic;
+      opacity: 0.8;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+    
+    .review-divider {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+    }
+    
+    body.dark-mode .review-divider {
+      border-top-color: rgba(255,255,255,0.1);
+    }
+    
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .author-avatar {
+      width: 45px;
+      height: 45px;
+      background: rgba(185,74,72,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #b94a48;
+    }
+    
+    /* Accessibility */
+    .access-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    
+    .access-card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    
+    body.dark-mode .access-card {
+      background: #252542;
+    }
+    
+    .access-icon {
+      width: 70px;
+      height: 70px;
+      background: rgba(185,74,72,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      font-size: 1.8rem;
+      color: #b94a48;
+    }
+    
+    .access-card h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+    
+    body.dark-mode .access-card h3 {
+      color: #eee;
+    }
+    
+    .access-card p {
+      font-size: 0.9rem;
+      opacity: 0.7;
     }
     
     /* Footer */
     footer {
-      padding: 3rem 1rem;
+      background: #f8f9fa;
+      padding: 60px 20px 30px;
       border-top: 1px solid rgba(0,0,0,0.1);
     }
     
-    body.light footer {
-      background-color: #f8fafc !important;
-      border-top-color: rgba(0,0,0,0.1);
-    }
-    
-    body.dark footer {
+    body.dark-mode footer {
+      background: #16162a;
       border-top-color: rgba(255,255,255,0.1);
-      background: #1e293b !important;
     }
     
-    /* Story section */
-    body.light section:nth-of-type(2) {
-      background-color: #f8fafc !important;
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto 40px;
     }
     
-    /* Location section */
-    body.light section:nth-of-type(5) {
-      background-color: #f8fafc !important;
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #b94a48;
+      margin-bottom: 15px;
     }
     
-    /* Accessibility section */
-    body.light section:nth-of-type(7) {
-      background-color: #f8fafc !important;
+    .footer-col p {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      line-height: 1.7;
     }
     
-    /* Accessibility */
+    .footer-col h4 {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    body.dark-mode .footer-col h4 {
+      color: #eee;
+    }
+    
+    .footer-col ul {
+      list-style: none;
+    }
+    
+    .footer-col li {
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+    
+    .footer-col a:hover {
+      color: #b94a48;
+    }
+    
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      max-width: 1100px;
+      margin: 0 auto 20px;
+    }
+    
+    body.dark-mode .footer-divider {
+      border-top-color: rgba(255,255,255,0.1);
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    
+    /* Floating Buttons */
     .settings-btn {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      z-index: 1000;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: var(--primary);
+      bottom: 30px;
+      right: 30px;
+      width: 55px;
+      height: 55px;
+      background: #b94a48;
       color: white;
       border: none;
+      border-radius: 50%;
+      font-size: 1.3rem;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(185,74,72,0.4);
+      box-shadow: 0 4px 20px rgba(185,74,72,0.4);
+      z-index: 999;
     }
     
-    /* Responsive */
-    @media (max-width: 768px) {
-      .section-title { font-size: 1.75rem; }
-      .hero h1 { font-size: 2rem !important; }
-    }
-    
-    /* Text size options */
-    body.text-large { font-size: 18px; }
-    body.text-xlarge { font-size: 20px; }
-    
-    /* High contrast */
-    body.high-contrast {
-      --primary: #ff4444;
-    }
-    
-    body.high-contrast.dark {
-      background: #000;
-      color: #fff;
-    }
-    
-    /* Badge */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      border-radius: 9999px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      background: rgba(185,74,72,0.1);
-      color: var(--primary);
-    }
-    
-    body.dark .badge {
-      background: rgba(255,255,255,0.1);
-    }
-    
-    /* Hide Nepali by default */
-    .ne { display: none; }
-    body.lang-ne .en { display: none; }
-    body.lang-ne .ne { display: block; }
-    
-    /* Back to top */
     .back-to-top {
       position: fixed;
-      bottom: 6rem;
-      right: 2rem;
-      z-index: 999;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--primary);
+      bottom: 100px;
+      right: 30px;
+      width: 45px;
+      height: 45px;
+      background: #b94a48;
       color: white;
       border: none;
+      border-radius: 50%;
+      font-size: 1rem;
       cursor: pointer;
+      z-index: 999;
       display: none;
     }
     
-    .back-to-top.visible { display: flex; align-items: center; justify-content: center; }
+    .back-to-top.visible {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .modal-overlay.active {
+      display: flex;
+    }
+    
+    .modal {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 400px;
+      width: 100%;
+    }
+    
+    body.dark-mode .modal {
+      background: #252542;
+    }
+    
+    .modal h3 {
+      color: #b94a48;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .modal-row {
+      margin-bottom: 20px;
+    }
+    
+    .modal-row label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+    
+    .size-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .size-buttons button {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid #b94a48;
+      background: transparent;
+      color: #b94a48;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    
+    .size-buttons button:hover,
+    .size-buttons button.active {
+      background: #b94a48;
+      color: white;
+    }
+    
+    /* Language */
+    .ne-text { display: none; }
+    body.lang-ne .en-text { display: none; }
+    body.lang-ne .ne-text { display: inline; }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1rem; }
+      .section-title { font-size: 1.8rem; }
+      .section { padding: 50px 20px; }
+    }
   </style>
 </head>
-<body class="light">
-  
+<body>
+
   <!-- Header -->
-  <header class="header" id="header">
-    <div class="max-w-6xl mx-auto flex items-center justify-between">
-      <a href="#" class="flex items-center gap-2 text-xl font-bold primary-text">
+  <header id="header">
+    <div class="container">
+      <a href="#" class="logo">
         <i class="fas fa-utensils"></i>
-        <span class="en">Lete Thakali Kitchen</span>
-        <span class="ne">लेटे थकाली किचन</span>
+        <span class="en-text">Lete Thakali Kitchen</span>
+        <span class="ne-text">लेटे थकाली किचन</span>
       </a>
       
-      <nav class="hidden md:flex items-center gap-4">
-        <a href="#menu" class="hover:text-primary transition-colors">
-          <span class="en">Menu</span>
-          <span class="ne">मेनु</span>
-        </a>
-        <a href="#location" class="hover:text-primary transition-colors">
-          <span class="en">Location</span>
-          <span class="ne">स्थान</span>
-        </a>
-        <a href="#reviews" class="hover:text-primary transition-colors">
-          <span class="en">Reviews</span>
-          <span class="ne">समीक्षा</span>
-        </a>
-        <a href="#accessibility" class="hover:text-primary transition-colors">
-          <span class="en">Accessibility</span>
-          <span class="ne">पहुँच</span>
-        </a>
+      <nav>
+        <a href="#menu"><span class="en-text">Menu</span><span class="ne-text">मेनु</span></a>
+        <a href="#location"><span class="en-text">Location</span><span class="ne-text">स्थान</span></a>
+        <a href="#reviews"><span class="en-text">Reviews</span><span class="ne-text">समीक्षा</span></a>
+        <a href="#accessibility"><span class="en-text">Accessibility</span><span class="ne-text">पहुँच</span></a>
       </nav>
       
-      <div class="flex items-center gap-2">
-        <!-- Language Toggle -->
-        <button onclick="toggleLanguage()" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" title="Change Language">
+      <div class="header-buttons">
+        <button onclick="toggleLanguage()" title="Change Language">
           <i class="fas fa-globe"></i>
         </button>
-        
-        <!-- Theme Toggle -->
-        <button onclick="toggleTheme()" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" title="Toggle Theme">
+        <button onclick="toggleTheme()" title="Toggle Theme">
           <i class="fas fa-moon" id="themeIcon"></i>
         </button>
-        
-        <!-- Mobile Menu -->
-        <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
           <i class="fas fa-bars"></i>
         </button>
       </div>
     </div>
-    
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4 border-t pt-4">
-      <nav class="flex flex-col gap-2">
-        <a href="#menu" class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
-          <span class="en">Menu</span>
-          <span class="ne">मेनु</span>
-        </a>
-        <a href="#location" class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
-          <span class="en">Location</span>
-          <span class="ne">स्थान</span>
-        </a>
-        <a href="#reviews" class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
-          <span class="en">Reviews</span>
-          <span class="ne">समीक्षा</span>
-        </a>
-      </nav>
-    </div>
   </header>
-  
-  <!-- Hero Section -->
+
+  <!-- Hero -->
   <section class="hero">
-    <div class="max-w-3xl">
-      <span class="badge mb-4">
+    <div class="hero-content">
+      <span class="badge">
         <i class="fas fa-star"></i>
-        <span class="en">Official Website</span>
-        <span class="ne">आधिकारिक वेबसाइट</span>
+        <span class="en-text">Official Website</span>
+        <span class="ne-text">आधिकारिक वेबसाइट</span>
       </span>
-      
-      <h1 class="text-4xl md:text-6xl font-bold mb-6 primary-text">
-        <span class="en">Lete Thakali Kitchen</span>
-        <span class="ne">लेटे थकाली किचन</span>
+      <h1>
+        <span class="en-text">Lete Thakali Kitchen</span>
+        <span class="ne-text">लेटे थकाली किचन</span>
       </h1>
-      
-      <p class="text-lg md:text-xl mb-8 opacity-80 max-w-2xl mx-auto">
-        <span class="en">Authentic Thakali cuisine from the heart of the Himalayas. Experience the rich flavors of traditional Nepali food with warm hospitality at our multiple locations across Kathmandu Valley.</span>
-        <span class="ne">हिमालयको मुटुबाट प्रामाणिक थकाली खाना। काठमाडौं उपत्यकाका विभिन्न स्थानहरूमा न्यानो आतिथ्यसहित परम्परागत नेपाली खानाको समृद्ध स्वाद अनुभव गर्नुहोस्।</span>
+      <p>
+        <span class="en-text">Authentic Thakali cuisine from the heart of the Himalayas. Experience the rich flavors of traditional Nepali food with warm hospitality at our multiple locations across Kathmandu Valley.</span>
+        <span class="ne-text">हिमालयको मुटुबाट प्रामाणिक थकाली खाना। काठमाडौं उपत्यकाका विभिन्न स्थानहरूमा न्यानो आतिथ्यसहित परम्परागत नेपाली खानाको समृद्ध स्वाद अनुभव गर्नुहोस्।</span>
       </p>
-      
-      <div class="flex flex-wrap gap-4 justify-center">
+      <div class="hero-buttons">
         <a href="#menu" class="btn btn-primary">
           <i class="fas fa-utensils"></i>
-          <span class="en">View Menu</span>
-          <span class="ne">मेनु हेर्नुहोस्</span>
+          <span class="en-text">View Menu</span>
+          <span class="ne-text">मेनु हेर्नुहोस्</span>
         </a>
         <a href="#location" class="btn btn-outline">
           <i class="fas fa-map-marker-alt"></i>
-          <span class="en">Find Us</span>
-          <span class="ne">हामीलाई भेट्नुहोस्</span>
+          <span class="en-text">Find Us</span>
+          <span class="ne-text">हामीलाई भेट्नुहोस्</span>
         </a>
       </div>
     </div>
   </section>
-  
+
   <!-- Our Story -->
-  <section class="bg-gray-50 dark:bg-gray-900">
-    <div class="max-w-4xl mx-auto">
-      <div class="card p-8 border-l-4 border-l-primary">
-        <h2 class="text-2xl font-bold primary-text mb-4 flex items-center gap-2">
-          <i class="fas fa-heart"></i>
-          <span class="en">Our Story</span>
-          <span class="ne">हाम्रो कथा</span>
-        </h2>
-        <p class="opacity-80 mb-4">
-          <span class="en">Welcome to Lete Thakali Kitchen, a modest yet inviting restaurant that takes pride in serving authentic Thakali dishes with an emphasis on flavor and homely comfort. Our recipes originate from the Thak Khola region of Mustang, bringing the unique tastes of the Himalayas to your plate. With multiple locations in Tangal, Dhumbarahi, and Manbhawan, we have been serving families, travelers, and food enthusiasts who seek genuine Nepali flavors.</span>
-          <span class="ne">लेटे थकाली किचनमा स्वागत छ, एक साधारण तर आकर्षक रेस्टुरेन्ट जसले स्वाद र घरेलु आराममा जोड दिँदै प्रामाणिक थकाली व्यञ्जनहरू प्रदान गर्नमा गर्व गर्छ। हाम्रा व्यञ्जनहरू मुस्ताङको थक खोला क्षेत्रबाट उत्पत्ति भएका छन्।</span>
-        </p>
-        <p class="font-semibold primary-text">
-          <span class="en">— The Lete Thakali Family</span>
-          <span class="ne">— लेटे थकाली परिवार</span>
-        </p>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Menu Section -->
-  <section id="menu">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="section-title">
-        <span class="en">Our Menu</span>
-        <span class="ne">हाम्रो मेनु</span>
+  <section class="section section-gray">
+    <div class="story-card">
+      <h2>
+        <i class="fas fa-heart"></i>
+        <span class="en-text">Our Story</span>
+        <span class="ne-text">हाम्रो कथा</span>
       </h2>
-      <p class="text-center opacity-70 mb-12 max-w-2xl mx-auto">
-        <span class="en">Authentic Thakali flavors prepared with love and traditional recipes from Mustang</span>
-        <span class="ne">मुस्ताङबाट परम्परागत व्यञ्जन विधिहरूद्वारा तयार पारिएको प्रामाणिक थकाली स्वाद</span>
+      <p>
+        <span class="en-text">Welcome to Lete Thakali Kitchen, a modest yet inviting restaurant that takes pride in serving authentic Thakali dishes with an emphasis on flavor and homely comfort. Our recipes originate from the Thak Khola region of Mustang, bringing the unique tastes of the Himalayas to your plate. With multiple locations in Tangal, Dhumbarahi, and Manbhawan, we have been serving families, travelers, and food enthusiasts who seek genuine Nepali flavors.</span>
+        <span class="ne-text">लेटे थकाली किचनमा स्वागत छ, एक साधारण तर आकर्षक रेस्टुरेन्ट जसले स्वाद र घरेलु आराममा जोड दिँदै प्रामाणिक थकाली व्यञ्जनहरू प्रदान गर्नमा गर्व गर्छ। हाम्रा व्यञ्जनहरू मुस्ताङको थक खोला क्षेत्रबाट उत्पत्ति भएका छन्।</span>
       </p>
+      <p class="author">
+        <span class="en-text">— The Lete Thakali Family</span>
+        <span class="ne-text">— लेटे थकाली परिवार</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section id="menu" class="section section-light">
+    <h2 class="section-title">
+      <span class="en-text">Our Menu</span>
+      <span class="ne-text">हाम्रो मेनु</span>
+    </h2>
+    <p class="section-subtitle">
+      <span class="en-text">Authentic Thakali flavors prepared with love and traditional recipes from Mustang</span>
+      <span class="ne-text">मुस्ताङबाट परम्परागत व्यञ्जन विधिहरूद्वारा तयार पारिएको प्रामाणिक थकाली स्वाद</span>
+    </p>
+    
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-card-header">
+          <div class="menu-icon"><i class="fas fa-bowl-food"></i></div>
+          <h3><span class="en-text">Thakali Khana Set</span><span class="ne-text">थकाली खाना सेट</span></h3>
+        </div>
+        <p><span class="en-text">Our signature Thakali thali featuring fluffy steamed rice, flavorful dal, seasonal vegetables, tangy achar, and your choice of chicken, mutton, or fish. Served with unlimited refills.</span><span class="ne-text">हाम्रो हस्ताक्षर थकाली थाली जसमा पुल्किलो भात, स्वादिष्ट दाल, मौसमी तरकारी, अचार, र तपाईंको रोजाइमा कुखुरा, खसी वा माछा।</span></p>
+        <p class="price">Rs 350 – 650</p>
+        <div class="tags">
+          <span class="tag"><i class="fas fa-leaf"></i> <span class="en-text">Unlimited Refills</span><span class="ne-text">असीमित रिफिल</span></span>
+          <span class="tag"><i class="fas fa-leaf"></i> <span class="en-text">Vegan Options</span><span class="ne-text">विशाकाहारी</span></span>
+        </div>
+      </div>
       
-      <div class="grid md:grid-cols-3 gap-6">
-        <!-- Thakali Set -->
-        <div class="card p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="p-3 rounded-full primary-bg-light">
-              <i class="fas fa-bowl-food text-xl primary-text"></i>
-            </div>
-            <h3 class="text-xl font-bold">
-              <span class="en">Thakali Khana Set</span>
-              <span class="ne">थकाली खाना सेट</span>
-            </h3>
-          </div>
-          <p class="opacity-70 mb-4">
-            <span class="en">Our signature Thakali thali featuring fluffy steamed rice, flavorful dal, seasonal vegetables, tangy achar, and your choice of chicken, mutton, or fish. Served with unlimited refills.</span>
-            <span class="ne">हाम्रो हस्ताक्षर थकाली थाली जसमा पुल्किलो भात, स्वादिष्ट दाल, मौसमी तरकारी, अचार, र तपाईंको रोजाइमा कुखुरा, खसी वा माछा। असीमित रिफिलसहित।</span>
-          </p>
-          <p class="font-bold primary-text text-lg mb-3">Rs 350 – 650</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800">
-              <i class="fas fa-leaf mr-1"></i>
-              <span class="en">Unlimited Refills</span>
-              <span class="ne">असीमित रिफिल</span>
-            </span>
-            <span class="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800">
-              <i class="fas fa-leaf mr-1"></i>
-              <span class="en">Vegan Options</span>
-              <span class="ne">विशाकाहारी विकल्प</span>
-            </span>
-          </div>
+      <div class="menu-card">
+        <div class="menu-card-header">
+          <div class="menu-icon"><i class="fas fa-mug-hot"></i></div>
+          <h3><span class="en-text">Traditional Breakfast</span><span class="ne-text">परम्परागत नास्ता</span></h3>
         </div>
-        
-        <!-- Breakfast -->
-        <div class="card p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="p-3 rounded-full primary-bg-light">
-              <i class="fas fa-mug-hot text-xl primary-text"></i>
-            </div>
-            <h3 class="text-xl font-bold">
-              <span class="en">Traditional Breakfast</span>
-              <span class="ne">परम्परागत नास्ता</span>
-            </h3>
-          </div>
-          <p class="opacity-70 mb-4">
-            <span class="en">Start your day with our authentic Thakali breakfast featuring sel roti, aloo achar, chiya (Nepali tea), and local bread varieties. Perfect for fueling your Kathmandu adventures.</span>
-            <span class="ne">सेल रोटी, आलु अचार, चिया, र स्थानीय रोटी सहित हाम्रो प्रामाणिक थकाली नास्ताले आफ्नो दिन सुरु गर्नुहोस्।</span>
-          </p>
-          <p class="font-bold primary-text text-lg mb-3">Rs 250 – 400</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800">
-              <i class="fas fa-leaf mr-1"></i>
-              <span class="en">Traditional Recipe</span>
-              <span class="ne">परम्परागत व्यञ्जन</span>
-            </span>
-            <span class="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800">
-              <i class="fas fa-leaf mr-1"></i>
-              <span class="en">Fresh Daily</span>
-              <span class="ne">प्रतिदिन ताजा</span>
-            </span>
-          </div>
+        <p><span class="en-text">Start your day with our authentic Thakali breakfast featuring sel roti, aloo achar, chiya (Nepali tea), and local bread varieties. Perfect for fueling your Kathmandu adventures.</span><span class="ne-text">सेल रोटी, आलु अचार, चिया, र स्थानीय रोटी सहित हाम्रो प्रामाणिक थकाली नास्ताले आफ्नो दिन सुरु गर्नुहोस्।</span></p>
+        <p class="price">Rs 250 – 400</p>
+        <div class="tags">
+          <span class="tag"><i class="fas fa-leaf"></i> <span class="en-text">Traditional Recipe</span><span class="ne-text">परम्परागत</span></span>
+          <span class="tag"><i class="fas fa-leaf"></i> <span class="en-text">Fresh Daily</span><span class="ne-text">ताजा</span></span>
         </div>
-        
-        <!-- Specialty -->
-        <div class="card p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="p-3 rounded-full primary-bg-light">
-              <i class="fas fa-fire text-xl primary-text"></i>
-            </div>
-            <h3 class="text-xl font-bold">
-              <span class="en">Specialty Dishes</span>
-              <span class="ne">विशेष व्यञ्जनहरू</span>
-            </h3>
-          </div>
-          <p class="opacity-70 mb-4">
-            <span class="en">From our famous Khasi Ko Masu (goat meat curry) to Sukuti (dried meat) and Gundruk, each dish is prepared with traditional Thakali spices passed down through generations.</span>
-            <span class="ne">हाम्रो प्रसिद्ध खसीको मासु देखि सुकुटी र गुन्द्रुक सम्म, हरेक व्यञ्जन पुस्तौंदेखि हस्तान्तरण भएका परम्परागत थकाली मसलाले तयारी गरिएको।</span>
-          </p>
-          <p class="font-bold primary-text text-lg mb-3">Rs 400 – 800</p>
-          <div class="flex flex-wrap gap-2">
-            <span class="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800">
-              <i class="fas fa-leaf mr-1"></i>
-              <span class="en">Thakali Spices</span>
-              <span class="ne">थकाली मसला</span>
-            </span>
-            <span class="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-800">
-              <i class="fas fa-leaf mr-1"></i>
-              <span class="en">Family Recipe</span>
-              <span class="ne">पारिवारिक व्यञ्जन</span>
-            </span>
-          </div>
+      </div>
+      
+      <div class="menu-card">
+        <div class="menu-card-header">
+          <div class="menu-icon"><i class="fas fa-fire"></i></div>
+          <h3><span class="en-text">Specialty Dishes</span><span class="ne-text">विशेष व्यञ्जनहरू</span></h3>
+        </div>
+        <p><span class="en-text">From our famous Khasi Ko Masu (goat meat curry) to Sukuti (dried meat) and Gundruk, each dish is prepared with traditional Thakali spices passed down through generations.</span><span class="ne-text">हाम्रो प्रसिद्ध खसीको मासु देखि सुकुटी र गुन्द्रुक सम्म, हरेक व्यञ्जन पुस्तौंदेखि हस्तान्तरण भएका परम्परागत थकाली मसलाले तयारी गरिएको।</span></p>
+        <p class="price">Rs 400 – 800</p>
+        <div class="tags">
+          <span class="tag"><i class="fas fa-leaf"></i> <span class="en-text">Thakali Spices</span><span class="ne-text">थकाली मसला</span></span>
+          <span class="tag"><i class="fas fa-leaf"></i> <span class="en-text">Family Recipe</span><span class="ne-text">पारिवारिक</span></span>
         </div>
       </div>
     </div>
   </section>
-  
+
   <!-- Info Bar -->
   <section class="info-bar">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-center">
-      <div>
-        <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-3">
-          <i class="fas fa-map-marker-alt text-2xl"></i>
-        </div>
-        <h3 class="font-semibold text-lg mb-1">
-          <span class="en">Location</span>
-          <span class="ne">स्थान</span>
-        </h3>
-        <p class="opacity-80">Tangal, Dhumbarahi, Manbhawan</p>
+    <div class="container">
+      <div class="info-item">
+        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <h3><span class="en-text">Location</span><span class="ne-text">स्थान</span></h3>
+        <p>Tangal, Dhumbarahi, Manbhawan</p>
       </div>
-      <div>
-        <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-3">
-          <i class="fas fa-clock text-2xl"></i>
-        </div>
-        <h3 class="font-semibold text-lg mb-1">
-          <span class="en">Opening Hours</span>
-          <span class="ne">सञ्चालन समय</span>
-        </h3>
-        <p class="opacity-80">
-          <span class="en">Daily: 8:00 AM – 10:00 PM</span>
-          <span class="ne">प्रतिदिन: बिहान ८:०० – राति १०:००</span>
-        </p>
+      <div class="info-item">
+        <div class="info-icon"><i class="fas fa-clock"></i></div>
+        <h3><span class="en-text">Opening Hours</span><span class="ne-text">सञ्चालन समय</span></h3>
+        <p><span class="en-text">Daily: 8:00 AM – 10:00 PM</span><span class="ne-text">प्रतिदिन: बिहान ८:०० – राति १०:००</span></p>
       </div>
-      <div>
-        <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-3">
-          <i class="fas fa-phone text-2xl"></i>
-        </div>
-        <h3 class="font-semibold text-lg mb-1">
-          <span class="en">Contact</span>
-          <span class="ne">सम्पर्क</span>
-        </h3>
-        <a href="tel:+97714516866" class="opacity-80 hover:opacity-100 underline">01-4516866</a>
+      <div class="info-item">
+        <div class="info-icon"><i class="fas fa-phone"></i></div>
+        <h3><span class="en-text">Contact</span><span class="ne-text">सम्पर्क</span></h3>
+        <a href="tel:+97714516866">01-4516866</a>
       </div>
     </div>
   </section>
-  
-  <!-- Location Section -->
-  <section id="location" class="bg-gray-50 dark:bg-gray-900">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="section-title">
-        <span class="en">Find Us</span>
-        <span class="ne">हामीलाई भेट्नुहोस्</span>
-      </h2>
-      <p class="text-center opacity-70 mb-12 max-w-2xl mx-auto">
-        <span class="en">Visit any of our convenient locations across Kathmandu Valley. Spacious dining with ample parking available.</span>
-        <span class="ne">काठमाडौं उपत्यकामा हाम्रा कुनै पनि सुविधाजनक स्थानहरूमा आउनुहोस्। ठूलो डाइनिङ् र पर्याप्त पार्किङ उपलब्ध।</span>
-      </p>
-      
-      <!-- Location Cards -->
-      <div class="grid md:grid-cols-3 gap-6 mb-12">
-        <!-- Tangal -->
-        <div class="card p-6">
-          <h3 class="font-bold mb-2 flex items-center gap-2 primary-text">
-            <i class="fas fa-map-marker-alt"></i>
-            Tangal Branch
-          </h3>
-          <p class="text-sm opacity-70 mb-2">Tangal, Kathmandu</p>
-          <p class="text-sm">
-            <i class="fas fa-phone mr-1"></i>
-            <a href="tel:+97714433239" class="hover:text-primary transition-colors">01-4433239</a>
-          </p>
-        </div>
-        
-        <!-- Dhumbarahi -->
-        <div class="card p-6">
-          <h3 class="font-bold mb-2 flex items-center gap-2 primary-text">
-            <i class="fas fa-map-marker-alt"></i>
-            Dhumbarahi Branch
-          </h3>
-          <p class="text-sm opacity-70 mb-2">Opp. Sankha Park, Dhumbarahi</p>
-          <p class="text-sm">
-            <i class="fas fa-phone mr-1"></i>
-            <a href="tel:+97715913913" class="hover:text-primary transition-colors">01-5913913</a>
-          </p>
-        </div>
-        
-        <!-- Manbhawan -->
-        <div class="card p-6">
-          <h3 class="font-bold mb-2 flex items-center gap-2 primary-text">
-            <i class="fas fa-map-marker-alt"></i>
-            Manbhawan Branch
-          </h3>
-          <p class="text-sm opacity-70 mb-2">Opp. Paalcha Newari Kitchen, Lalitpur</p>
-          <p class="text-sm">
-            <i class="fas fa-phone mr-1"></i>
-            <a href="tel:+97715920748" class="hover:text-primary transition-colors">01-5920748</a>
-          </p>
+
+  <!-- Location -->
+  <section id="location" class="section section-gray">
+    <h2 class="section-title">
+      <span class="en-text">Find Us</span>
+      <span class="ne-text">हामीलाई भेट्नुहोस्</span>
+    </h2>
+    <p class="section-subtitle">
+      <span class="en-text">Visit any of our convenient locations across Kathmandu Valley. Spacious dining with ample parking available.</span>
+      <span class="ne-text">काठमाडौं उपत्यकामा हाम्रा कुनै पनि सुविधाजनक स्थानहरूमा आउनुहोस्।</span>
+    </p>
+    
+    <div class="location-grid">
+      <div class="location-card">
+        <h3><i class="fas fa-map-marker-alt"></i> Tangal Branch</h3>
+        <p>Tangal, Kathmandu</p>
+        <p><i class="fas fa-phone"></i> <a href="tel:+97714433239">01-4433239</a></p>
+      </div>
+      <div class="location-card">
+        <h3><i class="fas fa-map-marker-alt"></i> Dhumbarahi Branch</h3>
+        <p>Opp. Sankha Park, Dhumbarahi</p>
+        <p><i class="fas fa-phone"></i> <a href="tel:+97715913913">01-5913913</a></p>
+      </div>
+      <div class="location-card">
+        <h3><i class="fas fa-map-marker-alt"></i> Manbhawan Branch</h3>
+        <p>Opp. Paalcha Newari Kitchen, Lalitpur</p>
+        <p><i class="fas fa-phone"></i> <a href="tel:+97715920748">01-5920748</a></p>
+      </div>
+    </div>
+    
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.046964628111!2d85.30871531506256!3d27.715155982791642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18fcb77fd4bd%3A0x5809af95594450e6!2sLete%20Thakali%20Kitchen!5e0!3m2!1sen!2snp!4v1698304646808!5m2!1sen!2snp"></iframe>
+      <div class="map-buttons">
+        <a href="https://maps.google.com/?q=Lete+Thakali+Kitchen+Kathmandu" target="_blank" class="btn btn-primary">
+          <i class="fas fa-map-marker-alt"></i>
+          <span class="en-text">Open in Google Maps</span>
+          <span class="ne-text">गुगल म्याप्समा खोल्नुहोस्</span>
+        </a>
+        <a href="tel:+97714516866" class="btn btn-outline">
+          <i class="fas fa-phone"></i>
+          <span class="en-text">Call Now</span>
+          <span class="ne-text">फोन गर्नुहोस्</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews" class="section section-light">
+    <h2 class="section-title">
+      <span class="en-text">What Our Guests Say</span>
+      <span class="ne-text">हाम्रा अतिथिहरूले के भन्छन्</span>
+    </h2>
+    
+    <div class="reviews-grid">
+      <div class="review-card">
+        <blockquote>
+          <span class="en-text">"Lete Thakali is one of the best places to enjoy Dal Bhat in Kathmandu. The food has never been disappointing – authentic flavors that remind me of home cooking."</span>
+          <span class="ne-text">"काठमाडौंमा दाल भात उपभोग गर्ने उत्तम स्थानहरूमध्ये लेटे थकाली एक हो। खाना कहिल्यै निराश गर्दैन।"</span>
+        </blockquote>
+        <hr class="review-divider">
+        <div class="review-author">
+          <div class="author-avatar"><i class="fas fa-user"></i></div>
+          <span class="en-text">Local Foodie</span><span class="ne-text">स्थानीय फुडी</span>
         </div>
       </div>
       
-      <!-- Map -->
-      <div class="card overflow-hidden">
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.046964628111!2d85.30871531506256!3d27.715155982791642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18fcb77fd4bd%3A0x5809af95594450e6!2sLete%20Thakali%20Kitchen!5e0!3m2!1sen!2snp!4v1698304646808!5m2!1sen!2snp"
-          width="100%" 
-          height="400" 
-          style="border:0;" 
-          allowfullscreen="" 
-          loading="lazy"
-          class="w-full"
-        ></iframe>
-        <div class="p-4 flex flex-wrap gap-4 justify-center">
-          <a href="https://maps.google.com/?q=Lete+Thakali+Kitchen+Kathmandu" target="_blank" class="btn btn-primary">
-            <i class="fas fa-map-marker-alt"></i>
-            <span class="en">Open in Google Maps</span>
-            <span class="ne">गुगल म्याप्समा खोल्नुहोस्</span>
-          </a>
-          <a href="tel:+97714516866" class="btn btn-outline">
-            <i class="fas fa-phone"></i>
-            <span class="en">Call Now</span>
-            <span class="ne">अहिले फोन गर्नुहोस्</span>
-          </a>
+      <div class="review-card">
+        <blockquote>
+          <span class="en-text">"A kitchen that never disappoints! The service is excellent and the atmosphere is so homely. Love the spacious dining area and ample parking."</span>
+          <span class="ne-text">"कहिल्यै निराश नगर्ने भान्सा! सेवा उत्कृष्ट छ र वातावरण धेरै घरेलु जस्तो छ।"</span>
+        </blockquote>
+        <hr class="review-divider">
+        <div class="review-author">
+          <div class="author-avatar"><i class="fas fa-user"></i></div>
+          <span class="en-text">Family Visitor</span><span class="ne-text">पारिवारिक आगन्तुक</span>
+        </div>
+      </div>
+      
+      <div class="review-card">
+        <blockquote>
+          <span class="en-text">"Finally found authentic Thakali cuisine in the city! The dal was perfectly seasoned, and the unlimited refills made it even better. Staff is friendly and prices are reasonable."</span>
+          <span class="ne-text">"शहरमा अन्ततः प्रामाणिक थकाली खाना फेला पर्यो! दाल परिपूर्ण रूपमा मसला थियो।"</span>
+        </blockquote>
+        <hr class="review-divider">
+        <div class="review-author">
+          <div class="author-avatar"><i class="fas fa-user"></i></div>
+          <span class="en-text">Happy Customer</span><span class="ne-text">खुशी ग्राहक</span>
         </div>
       </div>
     </div>
   </section>
-  
-  <!-- Reviews Section -->
-  <section id="reviews">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="section-title">
-        <span class="en">What Our Guests Say</span>
-        <span class="ne">हाम्रा अतिथिहरूले के भन्छन्</span>
-      </h2>
-      
-      <div class="grid md:grid-cols-3 gap-6 mt-12">
-        <div class="card p-6">
-          <p class="italic opacity-70 mb-4">
-            <span class="en">"Lete Thakali is one of the best places to enjoy Dal Bhat in Kathmandu. The food has never been disappointing – authentic flavors that remind me of home cooking."</span>
-            <span class="ne">"काठमाडौंमा दाल भात उपभोग गर्ने उत्तम स्थानहरूमध्ये लेटे थकाली एक हो। खाना कहिल्यै निराश गर्दैन – घरेलु खानाको सम्झना गराउने प्रामाणिक स्वाद।"</span>
-          </p>
-          <hr class="my-4 opacity-20">
-          <div class="flex items-center gap-2">
-            <div class="w-10 h-10 rounded-full primary-bg-light flex items-center justify-center">
-              <i class="fas fa-user primary-text"></i>
-            </div>
-            <span class="font-medium">
-              <span class="en">Local Foodie</span>
-              <span class="ne">स्थानीय फुडी</span>
-            </span>
-          </div>
-        </div>
-        
-        <div class="card p-6">
-          <p class="italic opacity-70 mb-4">
-            <span class="en">"A kitchen that never disappoints! The service is excellent and the atmosphere is so homely. Love the spacious dining area and the fact that they have ample parking."</span>
-            <span class="ne">"कहिल्यै निराश नगर्ने भान्सा! सेवा उत्कृष्ट छ र वातावरण धेरै घरेलु जस्तो छ। ठूलो डाइनिङ् क्षेत्र र पर्याप्त पार्किङ भएकोमा खुशी।"</span>
-          </p>
-          <hr class="my-4 opacity-20">
-          <div class="flex items-center gap-2">
-            <div class="w-10 h-10 rounded-full primary-bg-light flex items-center justify-center">
-              <i class="fas fa-user primary-text"></i>
-            </div>
-            <span class="font-medium">
-              <span class="en">Family Visitor</span>
-              <span class="ne">पारिवारिक आगन्तुक</span>
-            </span>
-          </div>
-        </div>
-        
-        <div class="card p-6">
-          <p class="italic opacity-70 mb-4">
-            <span class="en">"Finally found authentic Thakali cuisine in the city! The dal was perfectly seasoned, and the unlimited refills made it even better. Staff is friendly and prices are reasonable."</span>
-            <span class="ne">"शहरमा अन्ततः प्रामाणिक थकाली खाना फेला पर्यो! दाल परिपूर्ण रूपमा मसला थियो, र असीमित रिफिलले झनै राम्रो बनायो।"</span>
-          </p>
-          <hr class="my-4 opacity-20">
-          <div class="flex items-center gap-2">
-            <div class="w-10 h-10 rounded-full primary-bg-light flex items-center justify-center">
-              <i class="fas fa-user primary-text"></i>
-            </div>
-            <span class="font-medium">
-              <span class="en">Happy Customer</span>
-              <span class="ne">खुशी ग्राहक</span>
-            </span>
-          </div>
-        </div>
+
+  <!-- Accessibility -->
+  <section id="accessibility" class="section section-gray">
+    <h2 class="section-title">
+      <i class="fas fa-universal-access"></i>
+      <span class="en-text">Accessibility & Inclusion</span>
+      <span class="ne-text">पहुँच र समावेश</span>
+    </h2>
+    <p class="section-subtitle">
+      <span class="en-text">We are committed to providing an inclusive dining experience for all our guests</span>
+      <span class="ne-text">हामी सबै अतिथिहरूको लागि समावेशी भोजन अनुभव प्रदान गर्न प्रतिबद्ध छौं</span>
+    </p>
+    
+    <div class="access-grid">
+      <div class="access-card">
+        <div class="access-icon"><i class="fas fa-wheelchair"></i></div>
+        <h3><span class="en-text">Wheelchair Accessible</span><span class="ne-text">व्हीलचेयर पहुँच</span></h3>
+        <p><span class="en-text">Step-free entrance and accessible seating available.</span><span class="ne-text">सीढी रहित प्रवेश र पहुँचयोग्य बसाइ उपलब्ध।</span></p>
+      </div>
+      <div class="access-card">
+        <div class="access-icon"><i class="fas fa-leaf"></i></div>
+        <h3><span class="en-text">Dietary Accommodations</span><span class="ne-text">आहार समायोजन</span></h3>
+        <p><span class="en-text">Vegetarian, vegan, and gluten-free options available.</span><span class="ne-text">शाकाहारी, विशाकाहारी, र ग्लुटेन-मुक्त विकल्पहरू।</span></p>
+      </div>
+      <div class="access-card">
+        <div class="access-icon"><i class="fas fa-eye"></i></div>
+        <h3><span class="en-text">Visual Assistance</span><span class="ne-text">दृश्य सहायता</span></h3>
+        <p><span class="en-text">Large print menus available upon request.</span><span class="ne-text">अनुरोधमा ठूलो छापा मेनुहरू उपलब्ध।</span></p>
+      </div>
+      <div class="access-card">
+        <div class="access-icon"><i class="fas fa-ear-listen"></i></div>
+        <h3><span class="en-text">Hearing Support</span><span class="ne-text">श्रवण समर्थन</span></h3>
+        <p><span class="en-text">Written communication materials available.</span><span class="ne-text">लिखित सञ्चार सामग्रीहरू उपलब्ध।</span></p>
       </div>
     </div>
   </section>
-  
-  <!-- Accessibility Section -->
-  <section id="accessibility" class="bg-gray-50 dark:bg-gray-900">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="section-title flex items-center justify-center gap-2">
-        <i class="fas fa-universal-access"></i>
-        <span class="en">Accessibility & Inclusion</span>
-        <span class="ne">पहुँच र समावेश</span>
-      </h2>
-      <p class="text-center opacity-70 mb-12 max-w-2xl mx-auto">
-        <span class="en">We are committed to providing an inclusive dining experience for all our guests</span>
-        <span class="ne">हामी सबै अतिथिहरूको लागि समावेशी भोजन अनुभव प्रदान गर्न प्रतिबद्ध छौं</span>
-      </p>
-      
-      <div class="grid md:grid-cols-4 gap-6">
-        <div class="card p-6 text-center">
-          <div class="w-16 h-16 rounded-full primary-bg-light flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-wheelchair text-2xl primary-text"></i>
-          </div>
-          <h3 class="font-bold mb-2">
-            <span class="en">Wheelchair Accessible</span>
-            <span class="ne">व्हीलचेयर पहुँच</span>
-          </h3>
-          <p class="text-sm opacity-70">
-            <span class="en">Step-free entrance and accessible seating available. Staff trained to assist.</span>
-            <span class="ne">सीढी रहित प्रवेश र पहुँचयोग्य बसाइ उपलब्ध।</span>
-          </p>
-        </div>
-        
-        <div class="card p-6 text-center">
-          <div class="w-16 h-16 rounded-full primary-bg-light flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-leaf text-2xl primary-text"></i>
-          </div>
-          <h3 class="font-bold mb-2">
-            <span class="en">Dietary Accommodations</span>
-            <span class="ne">आहार समायोजन</span>
-          </h3>
-          <p class="text-sm opacity-70">
-            <span class="en">Vegetarian, vegan, and gluten-free options available. Just ask our staff.</span>
-            <span class="ne">शाकाहारी, विशाकाहारी, र ग्लुटेन-मुक्त विकल्पहरू उपलब्ध।</span>
-          </p>
-        </div>
-        
-        <div class="card p-6 text-center">
-          <div class="w-16 h-16 rounded-full primary-bg-light flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-eye text-2xl primary-text"></i>
-          </div>
-          <h3 class="font-bold mb-2">
-            <span class="en">Visual Assistance</span>
-            <span class="ne">दृश्य सहायता</span>
-          </h3>
-          <p class="text-sm opacity-70">
-            <span class="en">Large print menus available. Staff happy to describe dishes in detail.</span>
-            <span class="ne">ठूलो छापा मेनुहरू उपलब्ध। कर्मचारीहरू व्यञ्जनहरू वर्णन गर्न खुसी छन्।</span>
-          </p>
-        </div>
-        
-        <div class="card p-6 text-center">
-          <div class="w-16 h-16 rounded-full primary-bg-light flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-ear-listen text-2xl primary-text"></i>
-          </div>
-          <h3 class="font-bold mb-2">
-            <span class="en">Hearing Support</span>
-            <span class="ne">श्रवण समर्थन</span>
-          </h3>
-          <p class="text-sm opacity-70">
-            <span class="en">Written communication materials available. Basic sign language support.</span>
-            <span class="ne">लिखित सञ्चार सामग्रीहरू उपलब्ध। मौलिक सांकेतिक भाषा समर्थन।</span>
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
+
   <!-- Footer -->
   <footer>
-    <div class="max-w-6xl mx-auto">
-      <div class="grid md:grid-cols-4 gap-8 mb-8">
-        <div>
-          <div class="flex items-center gap-2 mb-4">
-            <i class="fas fa-utensils text-xl primary-text"></i>
-            <span class="font-bold text-lg">Lete Thakali Kitchen</span>
-          </div>
-          <p class="text-sm opacity-70">
-            <span class="en">Authentic Thakali cuisine from the heart of Mustang. Experience traditional flavors with homely comfort.</span>
-            <span class="ne">मुस्ताङको मुटुबाट प्रामाणिक थकाली खाना। परम्परागत स्वादहरू घरेलु आरामसहित अनुभव गर्नुहोस्।</span>
-          </p>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <i class="fas fa-utensils"></i>
+          Lete Thakali Kitchen
         </div>
-        
-        <div>
-          <h4 class="font-semibold mb-4">
-            <span class="en">Quick Links</span>
-            <span class="ne">द्रुत लिङ्कहरू</span>
-          </h4>
-          <ul class="space-y-2 text-sm opacity-70">
-            <li><a href="#menu" class="hover:text-primary transition-colors">
-              <span class="en">Menu</span>
-              <span class="ne">मेनु</span>
-            </a></li>
-            <li><a href="#location" class="hover:text-primary transition-colors">
-              <span class="en">Location</span>
-              <span class="ne">स्थान</span>
-            </a></li>
-            <li><a href="#reviews" class="hover:text-primary transition-colors">
-              <span class="en">Reviews</span>
-              <span class="ne">समीक्षा</span>
-            </a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h4 class="font-semibold mb-4">
-            <span class="en">Contact</span>
-            <span class="ne">सम्पर्क</span>
-          </h4>
-          <ul class="space-y-2 text-sm opacity-70">
-            <li>Tangal: <a href="tel:+97714433239" class="hover:text-primary transition-colors">01-4433239</a></li>
-            <li>Dhumbarahi: <a href="tel:+97715913913" class="hover:text-primary transition-colors">01-5913913</a></li>
-            <li>Manbhawan: <a href="tel:+97715920748" class="hover:text-primary transition-colors">01-5920748</a></li>
-            <li><a href="mailto:letethakalikitchen@gmail.com" class="hover:text-primary transition-colors">letethakalikitchen@gmail.com</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h4 class="font-semibold mb-4">
-            <span class="en">Opening Hours</span>
-            <span class="ne">सञ्चालन समय</span>
-          </h4>
-          <p class="text-sm opacity-70 mb-4">
-            <span class="en">Daily: 8:00 AM – 10:00 PM</span>
-            <span class="ne">प्रतिदिन: बिहान ८:०० – राति १०:००</span>
-          </p>
-          <a href="https://www.facebook.com/Letethakalikitchan" target="_blank" class="btn btn-outline text-sm">
-            <i class="fab fa-facebook"></i>
-            Facebook
-          </a>
-        </div>
+        <p><span class="en-text">Authentic Thakali cuisine from the heart of Mustang. Experience traditional flavors with homely comfort.</span><span class="ne-text">मुस्ताङको मुटुबाट प्रामाणिक थकाली खाना। परम्परागत स्वादहरू घरेलु आरामसहित।</span></p>
       </div>
-      
-      <hr class="my-8 opacity-20">
-      
-      <p class="text-center text-sm opacity-70">
-        © 2025 Lete Thakali Kitchen. 
-        <span class="en">All rights reserved.</span>
-        <span class="ne">सर्वाधिकार सुरक्षित।</span>
-      </p>
+      <div class="footer-col">
+        <h4><span class="en-text">Quick Links</span><span class="ne-text">द्रुत लिङ्कहरू</span></h4>
+        <ul>
+          <li><a href="#menu"><span class="en-text">Menu</span><span class="ne-text">मेनु</span></a></li>
+          <li><a href="#location"><span class="en-text">Location</span><span class="ne-text">स्थान</span></a></li>
+          <li><a href="#reviews"><span class="en-text">Reviews</span><span class="ne-text">समीक्षा</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4><span class="en-text">Contact</span><span class="ne-text">सम्पर्क</span></h4>
+        <ul>
+          <li>Tangal: <a href="tel:+97714433239">01-4433239</a></li>
+          <li>Dhumbarahi: <a href="tel:+97715913913">01-5913913</a></li>
+          <li>Manbhawan: <a href="tel:+97715920748">01-5920748</a></li>
+          <li><a href="mailto:letethakalikitchen@gmail.com">letethakalikitchen@gmail.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4><span class="en-text">Opening Hours</span><span class="ne-text">सञ्चालन समय</span></h4>
+        <p><span class="en-text">Daily: 8:00 AM – 10:00 PM</span><span class="ne-text">प्रतिदिन: बिहान ८:०० – राति १०:००</span></p>
+        <br>
+        <a href="https://www.facebook.com/Letethakalikitchan" target="_blank" class="btn btn-outline" style="font-size:0.85rem;padding:8px 16px;">
+          <i class="fab fa-facebook"></i> Facebook
+        </a>
+      </div>
     </div>
+    <hr class="footer-divider">
+    <p class="footer-bottom">© 2025 Lete Thakali Kitchen. <span class="en-text">All rights reserved.</span><span class="ne-text">सर्वाधिकार सुरक्षित।</span></p>
   </footer>
-  
-  <!-- Accessibility Settings Button -->
-  <button class="settings-btn" onclick="toggleSettings()" title="Accessibility Settings">
-    <i class="fas fa-universal-access"></i>
-  </button>
-  
-  <!-- Back to Top Button -->
-  <button class="back-to-top" id="backToTop" onclick="scrollToTop()" title="Back to top">
-    <i class="fas fa-chevron-up"></i>
-  </button>
-  
+
+  <!-- Floating Buttons -->
+  <button class="settings-btn" onclick="toggleSettings()"><i class="fas fa-universal-access"></i></button>
+  <button class="back-to-top" id="backToTop" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
+
   <!-- Settings Modal -->
-  <div id="settingsModal" class="fixed inset-0 bg-black/50 z-[1001] hidden items-center justify-center p-4">
-    <div class="card p-6 max-w-md w-full">
-      <h3 class="text-xl font-bold mb-4 primary-text flex items-center gap-2">
-        <i class="fas fa-cog"></i>
-        <span class="en">Settings</span>
-        <span class="ne">सेटिङहरू</span>
-      </h3>
-      
-      <div class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium mb-2">
-            <span class="en">Text Size</span>
-            <span class="ne">पाठ आकार</span>
-          </label>
-          <div class="flex gap-2">
-            <button onclick="setTextSize('normal')" class="flex-1 btn btn-outline text-sm">A</button>
-            <button onclick="setTextSize('large')" class="flex-1 btn btn-outline text-sm">A+</button>
-            <button onclick="setTextSize('xlarge')" class="flex-1 btn btn-outline text-sm">A++</button>
-          </div>
-        </div>
-        
-        <div>
-          <label class="block text-sm font-medium mb-2">
-            <span class="en">High Contrast</span>
-            <span class="ne">उच्च विपरीतता</span>
-          </label>
-          <button onclick="toggleHighContrast()" class="btn btn-outline" id="contrastBtn">Off</button>
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal">
+      <h3><i class="fas fa-cog"></i> <span class="en-text">Settings</span><span class="ne-text">सेटिङहरू</span></h3>
+      <div class="modal-row">
+        <label><span class="en-text">Text Size</span><span class="ne-text">पाठ आकार</span></label>
+        <div class="size-buttons">
+          <button onclick="setTextSize('normal')">A</button>
+          <button onclick="setTextSize('large')">A+</button>
+          <button onclick="setTextSize('xlarge')">A++</button>
         </div>
       </div>
-      
-      <button onclick="toggleSettings()" class="btn btn-primary w-full mt-6">
-        <span class="en">Close</span>
-        <span class="ne">बन्द गर्नुहोस्</span>
+      <button class="btn btn-primary" onclick="toggleSettings()" style="width:100%;margin-top:20px;">
+        <span class="en-text">Close</span><span class="ne-text">बन्द गर्नुहोस्</span>
       </button>
     </div>
   </div>
 
   <script>
-    // Theme Toggle
+    // Theme
     function toggleTheme() {
-      const body = document.body;
+      document.body.classList.toggle('dark-mode');
       const icon = document.getElementById('themeIcon');
-      
-      if (body.classList.contains('light')) {
-        body.classList.remove('light');
-        body.classList.add('dark');
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
+      if (document.body.classList.contains('dark-mode')) {
+        icon.classList.replace('fa-moon', 'fa-sun');
         localStorage.setItem('theme', 'dark');
       } else {
-        body.classList.remove('dark');
-        body.classList.add('light');
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
+        icon.classList.replace('fa-sun', 'fa-moon');
         localStorage.setItem('theme', 'light');
       }
     }
-    
-    // Language Toggle
+
+    // Language
     function toggleLanguage() {
-      const body = document.body;
-      if (body.classList.contains('lang-ne')) {
-        body.classList.remove('lang-ne');
-        localStorage.setItem('lang', 'en');
-      } else {
-        body.classList.add('lang-ne');
-        localStorage.setItem('lang', 'ne');
-      }
+      document.body.classList.toggle('lang-ne');
+      localStorage.setItem('lang', document.body.classList.contains('lang-ne') ? 'ne' : 'en');
     }
-    
-    // Mobile Menu
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('hidden');
-    }
-    
+
     // Settings Modal
     function toggleSettings() {
-      const modal = document.getElementById('settingsModal');
-      modal.classList.toggle('hidden');
-      modal.classList.toggle('flex');
+      document.getElementById('settingsModal').classList.toggle('active');
     }
-    
+
     // Text Size
     function setTextSize(size) {
-      const body = document.body;
-      body.classList.remove('text-large', 'text-xlarge');
-      if (size !== 'normal') {
-        body.classList.add('text-' + size);
-      }
+      document.body.style.fontSize = size === 'large' ? '18px' : size === 'xlarge' ? '20px' : '16px';
       localStorage.setItem('textSize', size);
+      document.querySelectorAll('.size-buttons button').forEach((btn, i) => {
+        btn.classList.toggle('active', ['normal', 'large', 'xlarge'][i] === size);
+      });
     }
-    
-    // High Contrast
-    function toggleHighContrast() {
-      const body = document.body;
-      body.classList.toggle('high-contrast');
-      const btn = document.getElementById('contrastBtn');
-      const isHighContrast = body.classList.contains('high-contrast');
-      btn.textContent = isHighContrast ? 'On' : 'Off';
-      localStorage.setItem('highContrast', isHighContrast);
-    }
-    
+
     // Back to Top
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    
-    // Scroll Effects
+
+    // Scroll Events
     window.addEventListener('scroll', () => {
-      const header = document.getElementById('header');
-      const backToTop = document.getElementById('backToTop');
-      
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-      
-      if (window.scrollY > 300) {
-        backToTop.classList.add('visible');
-      } else {
-        backToTop.classList.remove('visible');
-      }
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+      document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 300);
     });
-    
-    // Load saved settings
+
+    // Load Settings
     document.addEventListener('DOMContentLoaded', () => {
-      // Theme
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
-        document.body.classList.remove('light');
-        document.body.classList.add('dark');
-        document.getElementById('themeIcon').classList.remove('fa-moon');
-        document.getElementById('themeIcon').classList.add('fa-sun');
+      if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+        document.getElementById('themeIcon').classList.replace('fa-moon', 'fa-sun');
       }
-      
-      // Language
-      const savedLang = localStorage.getItem('lang');
-      if (savedLang === 'ne') {
+      if (localStorage.getItem('lang') === 'ne') {
         document.body.classList.add('lang-ne');
       }
-      
-      // Text Size
-      const savedTextSize = localStorage.getItem('textSize');
-      if (savedTextSize) {
-        setTextSize(savedTextSize);
-      }
-      
-      // High Contrast
-      const savedHighContrast = localStorage.getItem('highContrast');
-      if (savedHighContrast === 'true') {
-        document.body.classList.add('high-contrast');
-        document.getElementById('contrastBtn').textContent = 'On';
-      }
+      const textSize = localStorage.getItem('textSize');
+      if (textSize) setTextSize(textSize);
     });
-    
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-          // Close mobile menu if open
-          document.getElementById('mobileMenu').classList.add('hidden');
-        }
+        document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
       });
     });
   </script>
